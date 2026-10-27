@@ -1,20 +1,49 @@
 package com.mycompany.bank.development;
 
+import com.mycompany.bank.object.Account;
+
 public class Accounts {
 
-    public float deposit(float value) {
-        return 0.0f; }
+    public boolean deposit(Account account, float value) {
+        float aux = account.getBalance() + value;
+        account.setBalance(aux);
+        return true;
+    }
 
-    public float withdraw(float value) {
-        return 0.0f; }
+    public boolean withdraw(Account account, float value) {
+        boolean transac = false; 
+        if (value <= account.getBalance()){
+            float aux = account.getBalance() - value;
+            account.setBalance(aux);
+            transac = true;
+        }
+        return transac;
+    }
 
-    public float calculateMontthlyInterest() {
-        return 0.0f; }
+    private float calculateMontthlyInterest(Account account) {
+        return account.getAnualInteres()/12;
+    }
 
-    public float montthlyStatement() {
-        return 0.0f; }
+    public boolean montthlyStatement(Account account) {
+        
+        float monthlyInterest = calculateMontthlyInterest(account);
+        float montoInteresmen = monthlyInterest*account.getMonthlyFee();
+        float newBalance = (account.getBalance()-account.getMonthlyFee())- montoInteresmen;
+        account.setBalance(newBalance);
+        return true;
+    }
 
-    public String show() {
-        return ""; }
+    
+    public String toString(Account account) {
+        return  "Account{" + "balance=" + account.getBalance() + 
+                "numberDeposits=" + account.getNumberDeposits() + 
+                ", numberWithdrawals=" + account.getNumberWithdrawals() + 
+                ", anualInteres=" + account.getAnualInteres() + 
+                ", monthlyFee=" + account.getMonthlyFee() + '}';
+    }
+
+    
+
+    
 
 }

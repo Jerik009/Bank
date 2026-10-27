@@ -1,18 +1,20 @@
 
 package com.mycompany.bank.access;
 
+import com.mycompany.bank.object.SavingAccount;
+
 public interface InterfaceSavingAccounts {
     
-    public float deposit(float value);
+    public boolean deposit(SavingAccount savingAccount, float value);
 
     
-    public float withdraw(float value);
+    public boolean withdraw(SavingAccount savingAccount, float value);
 
     
-    public float montthlyStatement();
+    public boolean montthlyStatement(SavingAccount savingAccount);
 
     
-    public String show();
+    public String show(SavingAccount savingAccount);
     
     
 }
