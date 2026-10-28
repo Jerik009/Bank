@@ -30,9 +30,11 @@ public class SavingAccounts extends Accounts implements InterfaceSavingAccounts 
     public boolean montthlyStatement(SavingAccount savingAccount) {
         boolean aux = false;
         if (savingAccount.getNumberWithdrawals()>4){
-            savingAccount.setMonthlyFee(1000+savingAccount.getMonthlyFee());
-            aux = true;
+            int extraWithdrawals = savingAccount.getNumberWithdrawals()-4;
+            savingAccount.setMonthlyFee(extraWithdrawals*1000+savingAccount.getMonthlyFee());
         }
+        aux = super.montthlyStatement(savingAccount);
+        getState(savingAccount);
         return aux;
     }
 
@@ -40,17 +42,14 @@ public class SavingAccounts extends Accounts implements InterfaceSavingAccounts 
     public String show(SavingAccount savingAccount) {
         return "Account"+ 
                 "\n Balance= " + savingAccount.getBalance() +
-                ",\n NumberDeposits= " + savingAccount.getNumberDeposits() + 
-                ", \n NumberWithdrawals= " + savingAccount.getNumberWithdrawals() + 
-                ", \n AnualInteres= " + savingAccount.getAnualInteres() + 
-                ",\n MonthlyFee= " + savingAccount.getMonthlyFee();
+                ",\n MonthlyFee= " + savingAccount.getMonthlyFee() + 
+                ", \n Transactions= " + (savingAccount.getNumberDeposits() + savingAccount.getNumberWithdrawals());
     }
 
     private boolean getState(SavingAccount savingaccount) {
         
-        if (savingaccount.getBalance() >= 10000) {
-            savingaccount.setState(true);
-        }
+        savingaccount.setState(savingaccount.getBalance() >= 10000);
+        
         return savingaccount.isState();
     }
 

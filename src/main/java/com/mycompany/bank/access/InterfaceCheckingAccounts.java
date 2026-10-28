@@ -5,7 +5,7 @@ import com.mycompany.bank.object.CheckingAccount;
 
 public interface InterfaceCheckingAccounts {
     
-    public float deposit(float value);
+    public boolean deposit(CheckingAccount checkingAccount, float value);
 
     
     public boolean withdraw(CheckingAccount checkingAccount, float value);
@@ -14,6 +14,6 @@ public interface InterfaceCheckingAccounts {
     public boolean montthlyStatement(CheckingAccount checkingAccount);
 
     
-    public String show();
+    public String show(CheckingAccount checkingAccount);
     
 }

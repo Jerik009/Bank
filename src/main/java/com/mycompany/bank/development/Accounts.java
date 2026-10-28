@@ -21,8 +21,10 @@ public class Accounts {
     }
 
     private float calculateMontthlyInterest(Account account) {
-        return account.getAnualInteres()/12;
-    }
+    float monthlyInterest = account.getBalance() * (account.getAnualInteres()/12/100);
+    account.setBalance(account.getBalance() - monthlyInterest);
+    return monthlyInterest;
+}
 
     public boolean montthlyStatement(Account account) {
         
@@ -36,14 +38,10 @@ public class Accounts {
     
     public String toString(Account account) {
         return  "Account{" + "balance=" + account.getBalance() + 
-                "numberDeposits=" + account.getNumberDeposits() + 
+                ", numberDeposits=" + account.getNumberDeposits() + 
                 ", numberWithdrawals=" + account.getNumberWithdrawals() + 
                 ", anualInteres=" + account.getAnualInteres() + 
                 ", monthlyFee=" + account.getMonthlyFee() + '}';
     }
-
-    
-
-    
 
 }
